@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>Layout – Your Avatar & Designed by your name</title>
+</head>
+<body style="margin:0">
+
+  <!-- Bảng khung 2 cột + 1 hàng footer -->
+  <table border="1" width="900" height="520" cellpadding="0" cellspacing="0" align="center">
+    <tr>
+      <!-- Cột trái: Avatar chạy lên xuống -->
+      <td width="220" align="center" valign="top">
+        <!-- Set chiều cao để avatar nảy trong khung -->
+        <marquee direction="down"
+                 behavior="alternate"
+                 loop="-1"
+                 scrollamount="6"
+                 style="height:420px; display:block;">
+          <!-- Đổi đường dẫn ảnh cho đúng máy bạn -->
+          <img src="../learn_marquee/hinh/minh.jpg" alt="Your Avatar" width="160" height="auto">
+        </marquee>
+      </td>
+
+      <!-- Cột phải: Nội dung tĩnh (ví dụ mã số lớp) -->
+      <td align="center" valign="middle">
+        <h1 style="margin:0; font-family:Arial;">K234111E
+            <!-- Video YouTube -->
+            <iframe width="560" height="315" 
+                src="https://www.youtube.com/watch?v=4ngZfTM6psY" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+
+        </h1>
+      </td>
+    </tr>
+
+    <!-- Hàng footer: designed by... chạy qua lại 5 lần -->
+    <tr>
+      <td colspan="2" height="100" valign="middle">
+        <marquee behavior="alternate"
+                 direction="left"
+                 loop="5"
+                 scrollamount="8"
+                 style="font-family:Arial; font-size:20px;">
+          designed by Dương Tấn Minh
+        </marquee>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
