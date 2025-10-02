@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Classified Search Form - Dương Tấn Minh</title>
+    <link rel="stylesheet" href="mainstyle.css">
+</head>
+<body>
+    <div class="container"> 
+        <h2>Online Classifieds Search Form</h2>
+        <div class="header-line"></div>
+        <form id="classifiedForm">
+            <p><b>1) Search for a classified in the following sections:</b></p>
+            <table>
+                <tr>
+                    <td><label><input type="radio" name="section" value="Employment"> Employment</label></td>
+                    <td><label><input type="radio" name="section" value="Personal"> Personal</label></td>
+                    <td><label><input type="radio" name="section" value="For Sale"> For Sale</label></td>
+                </tr>
+                <tr>
+                    <td><label><input type="radio" name="section" value="Housing"> Housing</label></td>
+                    <td><label><input type="radio" name="section" value="Miscellaneous"> Miscellaneous</label></td>
+                    <td><label><input type="radio" name="section" value="All of the above"> All of the above</label></td>
+                </tr>
+            </table>
+
+            <p><b>2) Search the following publications:</b></p>
+            <table>
+                <tr>
+                    <td><label><input type="checkbox" name="publication[]" value="Midwest times" checked="checked"> Midwest times</label></td>
+                    <td><label><input type="checkbox" name="publication[]" value="Modern News"> Modern News</label></td>
+                    <td><label><input type="checkbox" name="publication[]" value="Employment Today"> Employment Today</label></td>
+                </tr>
+                <tr>
+                    <td><label><input type="checkbox" name="publication[]" value="Great Lakes Classifieds" checked="checked"> Great Lakes Classifieds</label></td>
+                    <td><label><input type="checkbox" name="publication[]" value="Middleton Daily"> Middleton Daily</label></td>
+                    <td><label><input type="checkbox" name="publication[]" value="Cashtown Daily News"> Cashtown Daily News</label></td>
+                </tr>
+            </table>
+
+            <p><b>3) From to</b> 
+                <input type="date" name="date_from" placeholder="mm/dd/yy"> 
+                to 
+                <input type="date" name="date_to" placeholder="mm/dd/yy">
+            </p>
+
+            <p><b>4) Enter a few keywords to describe the classified.</b></p>
+            <input type="text" name="keywords" style="width:95%">
+
+            <p><b>5) Click one of the options below:</b></p>
+            <div class="buttons">
+                <button type="button" onclick="alert('Search simulation')">
+                    <img src="Search.gif" alt="Search"><br>
+                </button>
+                <button type="button" onclick="alert('Help page (optional)')">
+                    <img src="Help.gif" alt="Help"><br>
+                </button>
+                <button type="reset">
+                    <img src="Cancel.gif" alt="Cancel"><br>
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
