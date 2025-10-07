@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Client Get Form - Dương Tấn Minh</title>
+    <script>
+        function giai()
+        {
+            //alert("Bạn muốn giải phương trình bậc 1")
+            hsa=frm_first_degree.hsa.value
+            hsb=frm_first_degree.hsb.value
+            frm_first_degree.result.value=(-hsb/hsa)
+        }
+        function mo_Website_khoa()
+        {
+            window.open("https://itbclub.uel.edu.vn/","_blank")
+        }
+    </script>
+</head>
+<body>
+    <form action="ServerGet.html" method="get">
+        <table border="1" cellpadding="0" cellspacing="0">
+            <tr>
+                <td>Name:</td>
+                <td>
+                    <input type="text" value="Obama" name="txtten" />
+                </td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td>
+                    <input type="email" value="Obama@gmail.com" name="txtemail" />
+                </td>
+                <td>
+                    <button type="button" onclick="javascript:giai()">Giải</button>
+                    <button type="button" onclick="mo_Website_khoa()">Mở website khoa</button>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit"/>
+    </form>
+</body>
+</html>

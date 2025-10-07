@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Server Get Result-Dương Tấn Minh</title>
+    <script>
+        function getUrlVars() {
+            var vars = {};
+            window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+                function(m, key, value) {
+                    vars[key] = value;
+                });
+            return vars;
+        }
+
+        var ten = unescape(getUrlVars()["txtten"]);
+        var email = unescape(getUrlVars()["txtemail"]);
+
+        window.onload = function() {
+            document.getElementById("iduser").innerHTML = ten;
+            document.getElementById("idemail").innerHTML = email;
+        }
+    </script>
+</head>
+<body>
+    <h2>Kết quả từ GET Method</h2>
+    <form>
+        <table border="1">
+            <tr>
+                <td>User:</td>
+                <td id="iduser"></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td id="idemail"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
