@@ -1,101 +1,93 @@
 <html>
 <head>
-  <title>Basic Math - Dương Tấn Minh</title>
-  <script>
-    function update_result() {
-      let a = document.myform.a_coeff.value;
-      let b = document.myform.b_coeff.value;
-      let op = document.myform.op_math.value;
-      let result2 = document.getElementById("result2");
+    <title>Basic math - Tấn Minh</title>
+    <script>
+        function update_result() {
+            let a = myform.a_coeff.value;
+            let b = myform.b_coeff.value;
+            let op = myform.op_math.value;
+            let result2 = document.getElementById("result2");
 
-    if (a === "" || b === "") {
-    result2.innerHTML = "<font color='red'>";
-    return;
-    }
+            if (a === "" || b === "") {
+                result2.innerHTML = "<font color='red'>Please enter both A and B</font>";
+                myform.result1.value = "";
+                return;
+            }
 
+            if (!isNaN(a) && !isNaN(b)) {
+                a = parseFloat(a);
+                b = parseFloat(b);
 
-      if (!isNaN(a) && !isNaN(b)) {
-        a = parseFloat(a);
-        b = parseFloat(b);
-        let textResult = "";
+                if (op === "add") {
+                    myform.result1.value = a + " + " + b + " = " + (a + b);
+                } else if (op === "minus") {
+                    myform.result1.value = a + " - " + b + " = " + (a - b);
+                } else if (op === "multi") {
+                    myform.result1.value = a + " * " + b + " = " + (a * b);
+                } else if (op === "div") {
+                    if (b === 0) {
+                        result2.innerHTML = "<font color='red'>Cannot divide by zero!</font>";
+                        myform.result1.value = "";
+                        return;
+                    }
+                    myform.result1.value = a + " / " + b + " = " + (a / b);
+                } else {
+                    result2.innerHTML = "<font color='red'>Please choose operator</font>";
+                    return;
+                }
 
-        if (op === "add") {
-          textResult = `${a} + ${b} = ${a + b}`;
-        } else if (op === "minus") {
-          textResult = `${a} - ${b} = ${a - b}`;
-        } else if (op === "multiply") {
-          textResult = `${a} * ${b} = ${a * b}`;
-        } else if (op === "divide") {
-          if (b === 0) {
-            result2.innerHTML = "<font color='red'>Cannot divide by zero!</font>";
-            document.myform.result1.value = "";
-            return;
-          }
-          textResult = `${a} / ${b} = ${a / b}`;
-        } else {
-          result2.innerHTML = "<font color='red'>Please select an operator</font>";
-          return;
+                result2.innerHTML = "<font color='blue'>" + myform.result1.value + "</font>";
+            } else {
+                result2.innerHTML = "<font color='red'>Invalid input</font>";
+                myform.result1.value = "";
+            }
         }
-
-        document.myform.result1.value = textResult;
-        result2.innerHTML = `<font color='blue'>${textResult}</font>`;
-      } else {
-        result2.innerHTML = "<font color='red'>Invalid input!</font>";
-      }
-    }
-  </script>
+    </script>
 </head>
 
 <body>
-  <form name="myform">
-    <table>
-      <tr>
-        <td>A Coeff.</td>
-        <td><input type="text" name="a_coeff" id="a_coeff" onchange="update_result()" /></td>
-      </tr>
+    <form name="myform">
+        <table>
+            <tr>
+                <td>A Coeff.</td>
+                <td><input type="text" name="a_coeff" id="a_coeff" oninput="update_result()"></td>
+            </tr>
+            <tr>
+                <td>Operators:</td>
+                <td>
+                    <input type="radio" name="op_math" id="op_add" value="add" onchange="update_result()">
+                    <label for="op_add">Add</label>
 
-      <tr>
-        <td>Operators:</td>
-        <td>
-          <input type="radio" name="op_math" id="op_add" value="add" onchange="update_result()" />
-          <label for="op_add">ADD</label>
+                    <input type="radio" name="op_math" id="op_minus" value="minus" onchange="update_result()">
+                    <label for="op_minus">Minus</label>
 
-          <input type="radio" name="op_math" id="op_minus" value="minus" onchange="update_result()" />
-          <label for="op_minus">MINUS</label>
+                    <input type="radio" name="op_math" id="op_multi" value="multi" onchange="update_result()">
+                    <label for="op_multi">Multi</label>
 
-          <input type="radio" name="op_math" id="op_multiply" value="multiply" onchange="update_result()" />
-          <label for="op_multiply">MULTIPLY</label>
-
-          <input type="radio" name="op_math" id="op_divide" value="divide" onchange="update_result()" />
-          <label for="op_divide">DIVIDE</label>
-        </td>
-      </tr>
-
-      <tr>
-        <td>B Coeff.</td>
-        <td><input type="text" name="b_coeff" id="b_coeff" onchange="update_result()" /></td>
-      </tr>
-
-      <tr>
-        <td>Result 1:</td>
-        <td><input type="text" name="result1" id="result1" readonly /></td>
-      </tr>
-
-      <tr>
-        <td>Result 2:</td>
-        <td><div id="result2" style="min-height:20px;"></div></td>
-      </tr>
-
-      <tr>
-        <td></td>
-        <td>
-          <button type="reset">Clear</button>
-          <button type="button" onclick="alert('This is a simple calculator. Enter numbers and choose an operator!')">
-            Help Page
-          </button>
-        </td>
-      </tr>
-    </table>
-  </form>
+                    <input type="radio" name="op_math" id="op_div" value="div" onchange="update_result()">
+                    <label for="op_div">Div</label>
+                </td>
+            </tr>
+            <tr>
+                <td>B Coeff.</td>
+                <td><input type="text" name="b_coeff" id="b_coeff" oninput="update_result()"></td>
+            </tr>
+            <tr>
+                <td>Result 1:</td>
+                <td><input type="text" name="result1" id="result1" readonly></td>
+            </tr>
+            <tr>
+                <td>Result 2:</td>
+                <td id="result2"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="reset" onclick="document.getElementById('result2').innerHTML=''">Clear</button>
+                    <button type="button" onclick="alert('This is a simple math calculator!')">Help page</button>
+                </td>
+            </tr>
+        </table>
+    </form>
 </body>
 </html>
