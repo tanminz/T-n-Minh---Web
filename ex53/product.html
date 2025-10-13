@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title> Ex_53 - Bích Ngọc </title>
+    <style>
+        td {
+            text-align: center;
+        }
+        .outer-border 
+        {   border: 2px solid black; 
+            border-collapse: collapse;}
+         .outer-border th, .outer-border td {
+            border: none;
+            padding: 8px;}
+    </style>
+  </head>
+  <body>
+    <form name="product_input" method="get" action="result.html">
+        <table class="outer-border">
+            <tr>
+                <th> Part Number </th>
+                <th> Description </th>
+                <th> Price </th>
+                <th> Qty </th>
+                <th> Item table </th>
+            </tr>
+            <tr>
+                <td> C112 </td>
+                <td> Mouse </td>
+                <td> 19.95$ </td>
+                <td>
+                    <input type="text" name="quantity1" id="quantity1"/>
+                </td>
+                <td>
+                    <input type="text" name="itemtable1" id="itemtable1"/>
+                </td>
+            </tr>
+            <tr>
+                <td> B124 </td>
+                <td> Keyboard US </td>
+                <td> 29.95$ </td>
+                <td>
+                    <input type="text" name="quantity2" id="quantity2"/>
+                </td>
+                <td>
+                    <input type="text" name="itemtable2" id="itemtable2"/>
+                </td>
+            </tr>
+            <tr>
+                <td> U125 </td>
+                <td> USB KingMax </td>
+                <td> 39.95$ </td>
+                <td>
+                    <input type="text" name="quantity3" id="quantity3"/>
+                </td>
+                <td>
+                    <input type="text" name="itemtable3" id="itemtable3"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align: right"> Total:</td>
+                <td>
+                    <input type="text" name="total" id="total"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" style="text-align: right">
+                    <button type="submit" style="background-color:orange ; font-size:16px"> Sum </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+  </body>
+</html>

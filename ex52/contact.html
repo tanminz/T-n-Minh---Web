@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Dương Tấn Minh</title>
+</head>
+<body>
+    <form name="frm_contact" action="student_page.html" method="get">
+        <table border="1">
+            <tr>
+                <td>
+                    <h3>Contact the editorial office</h3>
+                    
+                    <table>
+                        <tr>
+                            <td>Họ và tên:</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="fullname" id="fullname" style="width:410px"/>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Email:</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="email" name="email" id="email" style="width:200px"/>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Giới tính:</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" name="gender" value="Nam" id="male">
+                                <label for="male">Nam</label>
+                                <input type="radio" name="gender" value="Nữ" id="female" checked>
+                                <label for="female">Nữ</label>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="job" value="stable" id="stable" checked>
+                                <label for="stable">Tôi đã có nghề nghiệp ổn định</label>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Đến từ:</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="region">
+                                    <option value="Miền Bắc" selected>Miền Bắc</option>
+                                    <option value="Miền Trung">Miền Trung</option>
+                                    <option value="Miền Nam">Miền Nam</option>
+                                    <option value="Miền Tây">Miền Tây</option>
+                                </select>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Nội dung cá chúng tôi:</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <textarea name="content" rows="5" cols="50" style="width:410px; height:150px;" placeholder="Nội dung o đây"></textarea>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <button type="submit" style="background-color:rgb(166, 29, 29); color:aliceblue">Gởi thông điệp</button>
+                                <button type="reset">Nhập lại tất cả</button>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

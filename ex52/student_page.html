@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin đã gửi - Dương Tấn Minh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 600px;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            vertical-align: top;
+        }
+        .label {
+            font-weight: bold;
+            width: 150px;
+            background-color: #f5f5f5;
+        }
+        .value {
+            background-color: #ffffff;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Thông tin đã gửi thành công!</h1>
+    
+    <table border="1">
+        <tr>
+            <td class="label">Họ và tên:</td>
+            <td class="value" id="fullname"></td>
+        </tr>
+        <tr>
+            <td class="label">Email:</td>
+            <td class="value" id="email"></td>
+        </tr>
+        <tr>
+            <td class="label">Giới tính:</td>
+            <td class="value" id="gender"></td>
+        </tr>
+        <tr>
+            <td class="label">Nghề nghiệp:</td>
+            <td class="value" id="job"></td>
+        </tr>
+        <tr>
+            <td class="label">Đến từ:</td>
+            <td class="value" id="region"></td>
+        </tr>
+        <tr>
+            <td class="label">Nội dung:</td>
+            <td class="value" id="content"></td>
+        </tr>
+    </table>
+    
+    <script>
+        // Hàm lấy tham số từ URL
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+                vars[key] = decodeURIComponent(value);
+            });
+            return vars;
+        }
+        
+        // Lấy dữ liệu từ URL và hiển thị
+        var params = getUrlVars();
+        document.getElementById("fullname").textContent = params.fullname || "Không có dữ liệu";
+        document.getElementById("email").textContent = params.email || "Không có dữ liệu";
+        document.getElementById("gender").textContent = params.gender || "Không có dữ liệu";
+        document.getElementById("job").textContent = params.job ? "Có nghề nghiệp ổn định" : "Chưa có nghề nghiệp ổn định";
+        document.getElementById("region").textContent = params.region || "Không có dữ liệu";
+        document.getElementById("content").textContent = params.content || "Không có dữ liệu";
+    </script>
+</body>
+</html>

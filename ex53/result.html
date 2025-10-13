@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Kết quả đơn hàng - Dương Tấn Minh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .product-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        .total-section {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
+            border: 2px solid #007bff;
+        }
+        .total-amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 10px;
+        }
+        .thank-you {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Kết quả đơn hàng của bạn</h2>
+        
+        <div class="product-item" id="mouseResult"></div>
+        <div class="product-item" id="keyboardResult"></div>
+        <div class="product-item" id="usbResult"></div>
+        
+        <div class="total-section">
+            <strong>TỔNG CỘNG:</strong>
+            <div class="total-amount" id="totalResult"></div>
+        </div>
+        
+        <div class="thank-you">
+            <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!</p>
+        </div>
+    </div>
+    
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const qty1 = params.get('quantity1') || params.get('qty1') || "0";
+        const qty2 = params.get('quantity2') || params.get('qty2') || "0";
+        const qty3 = params.get('quantity3') || params.get('qty3') || "0";
+        const item1 = params.get('itemtable1') || params.get('item1') || "0";
+        const item2 = params.get('itemtable2') || params.get('item2') || "0";
+        const item3 = params.get('itemtable3') || params.get('item3') || "0";
+        const total = params.get('total') || "0";
+        
+        // Hiển thị thông tin sản phẩm
+        document.getElementById("mouseResult").innerHTML = 
+            "<strong>Chuột Quang (C112)</strong><br>" +
+            "Số lượng: " + qty1 + " | Thành tiền: " + parseFloat(item1).toFixed(2) + "$";
+            
+        document.getElementById("keyboardResult").innerHTML = 
+            "<strong>Bàn Phím (B124)</strong><br>" +
+            "Số lượng: " + qty2 + " | Thành tiền: " + parseFloat(item2).toFixed(2) + "$";
+            
+        document.getElementById("usbResult").innerHTML = 
+            "<strong>USB KingMax (U125)</strong><br>" +
+            "Số lượng: " + qty3 + " | Thành tiền: " + parseFloat(item3).toFixed(2) + "$";
+            
+        document.getElementById("totalResult").textContent = parseFloat(total).toFixed(2) + "$";
+    </script>
+</body>
+</html>
