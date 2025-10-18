@@ -1,0 +1,175 @@
+<html>
+<head>
+    <title>Bài 56: Xử lý chuỗi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        td {
+            padding: 5px;
+            border: 1px solid black;
+        }
+        textarea {
+            width: 200px;
+            height: 100px;
+            resize: both;
+        }
+        button {
+            padding: 5px 10px;
+            margin: 1px;
+            display: block;
+            width: 100%;
+        }
+        .button-left {
+            text-align: left;
+        }
+        .button-right {
+            text-align: right;
+        }
+        .button-center {
+            text-align: center;
+        }
+    </style>
+    <script>
+
+        function inputData() {
+            var input = document.getElementById("input_data").value;
+            document.getElementById("result").value = input;
+        }
+        
+
+        function toUpperCase() {
+            var input = document.getElementById("input_data").value;
+            document.getElementById("result").value = input.toUpperCase();
+        }
+        
+
+        function toLowerCase() {
+            var input = document.getElementById("input_data").value;
+            document.getElementById("result").value = input.toLowerCase();
+        }
+        
+
+        function countLowercase() {
+            var input = document.getElementById("input_data").value;
+            var count = 0;
+            for (var i = 0; i < input.length; i++) {
+                if (input.charAt(i) >= 'a' && input.charAt(i) <= 'z') {
+                    count++;
+                }
+            }
+            document.getElementById("result").value = "Số ký tự thường: " + count;
+        }
+        
+
+        function countUppercase() {
+            var input = document.getElementById("input_data").value;
+            var count = 0;
+            for (var i = 0; i < input.length; i++) {
+                if (input.charAt(i) >= 'A' && input.charAt(i) <= 'Z') {
+                    count++;
+                }
+            }
+            document.getElementById("result").value = "Số ký tự hoa: " + count;
+        }
+        
+
+        function printWordsPerLine() {
+            var input = document.getElementById("input_data").value;
+            var words = input.split(' ');
+            var result = "";
+            for (var i = 0; i < words.length; i++) {
+                if (words[i].trim() !== "") {
+                    result += words[i] + "\n";
+                }
+            }
+            document.getElementById("result").value = result;
+        }
+        
+
+        function countWords() {
+            var input = document.getElementById("input_data").value;
+            var words = input.split(' ');
+            var count = 0;
+            for (var i = 0; i < words.length; i++) {
+                if (words[i].trim() !== "") {
+                    count++;
+                }
+            }
+            document.getElementById("result").value = "Số từ: " + count;
+        }
+        
+
+        function printVowelsConsonants() {
+            var input = document.getElementById("input_data").value.toLowerCase();
+            var vowels = "";
+            var consonants = "";
+            
+            for (var i = 0; i < input.length; i++) {
+                var char = input.charAt(i);
+                if (char >= 'a' && char <= 'z') {
+                    if (char === 'a' || char === 'e' || char === 'i' || char === 'o' || char === 'u') {
+                        if (vowels.indexOf(char) === -1) {
+                            vowels += char + " ";
+                        }
+                    } else {
+                        if (consonants.indexOf(char) === -1) {
+                            consonants += char + " ";
+                        }
+                    }
+                }
+            }
+            
+            var result = "Nguyên âm: " + vowels.trim() + "\n";
+            result += "Phụ âm: " + consonants.trim();
+            document.getElementById("result").value = result;
+        }
+
+        function openW3C() {
+            window.open("https://www.w3schools.com/js/js_string_methods.asp", "_blank");
+        }
+    </script>
+</head>
+<body>
+    <h1>Sử dụng các hàm Xử Lý Chuỗi</h1>
+    <table>
+        <tr>
+            <td>-Nhập dữ liệu-</td>
+            <td>-Kết quả-</td>
+        </tr>
+        <tr>
+            <td><textarea id="input_data"></textarea></td>
+            <td><textarea id="result"></textarea></td>
+        </tr>
+        <tr>
+            <td class="button-left">
+                <button type="button" onclick="inputData()">Nhập dữ liệu</button><br>
+                <button type="button" onclick="toUpperCase()">In chữ Hoa</button><br>
+                <button type="button" onclick="toLowerCase()">In chữ thường</button><br>
+                <button type="button" onclick="countLowercase()">Đếm số ký tự thường</button>
+            </td>
+            <td class="button-right">
+                <button type="button" onclick="countUppercase()">Đếm ký tự hoa</button><br>
+                <button type="button" onclick="printWordsPerLine()">In mỗi từ trên mỗi dòng</button><br>
+                <button type="button" onclick="countWords()">Đếm số từ</button><br>
+                <button type="button" onclick="printVowelsConsonants()">In Nguyễn âm, phụ âm</button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="button-center">
+                <button type="button" onclick="openW3C()">Xem Website xử lý chuỗi w3c</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

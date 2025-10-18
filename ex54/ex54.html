@@ -1,0 +1,105 @@
+<html>
+<head>
+    <title>Bài 54: Hàm toán học - tấn minh</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 400px;   
+        }
+        td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .result {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+
+        function calculateMax() {
+            var a = parseFloat(document.getElementById("number_a").value);
+            var b = parseFloat(document.getElementById("number_b").value);
+            var c = parseFloat(document.getElementById("number_c").value);
+            
+            var max = Math.max(a, b, c);
+            document.getElementById("result").value = max;
+        }
+        
+
+        function calculateMin() {
+            var a = parseFloat(document.getElementById("number_a").value);
+            var b = parseFloat(document.getElementById("number_b").value);
+            var c = parseFloat(document.getElementById("number_c").value);
+            
+            var min = Math.min(a, b, c);
+            document.getElementById("result").value = min;
+        }
+        
+
+        function calculateSin() {
+            var a = parseFloat(document.getElementById("number_a").value);
+            var radians = a * Math.PI / 180; // Chuyển độ sang radian
+            var sinValue = Math.sin(radians);
+            document.getElementById("result").value = sinValue;
+        }
+        
+        function calculateCos() {
+            var a = parseFloat(document.getElementById("number_a").value);
+            var radians = a * Math.PI / 180; // Chuyển độ sang radian
+            var cosValue = Math.cos(radians);
+            document.getElementById("result").value = cosValue;
+        }
+        
+        function calculatePower() {
+            var a = parseFloat(document.getElementById("number_a").value);
+            var b = parseFloat(document.getElementById("number_b").value);
+            var power = Math.pow(a, b);
+            document.getElementById("result").value = power;
+        }
+    </script>
+</head>
+<body>
+    <h2>Bài 54: Hàm toán học</h2>
+    
+    <table>
+        <tr>
+            <td>a(Số thứ 1):</td>
+            <td><input type="text" id="number_a" value="30"></td>
+        </tr>
+        <tr>
+            <td>b(Số thứ 2):</td>
+            <td><input type="text" id="number_b" value="45"></td>
+        </tr>
+        <tr>
+            <td>c(Số thứ 3):</td>
+            <td><input type="text" id="number_c" value="90"></td>
+        </tr>
+        <tr>
+            <td class="result">KẾT QUẢ:</td>
+            <td class="result"><input type="text" id="result" readonly></td>
+        </tr>
+    </table>
+    
+    <div style="margin-top: 10px;">
+        <button type="button" onclick="calculateMax()">MAX</button>
+        <button type="button" onclick="calculateMin()">MIN</button>
+        <button type="button" onclick="calculateSin()">sin(a)</button>
+        <button type="button" onclick="calculateCos()">cos(a)</button>
+        <button type="button" onclick="calculatePower()">a^b</button>
+    </div>
+</body>
+</html>
