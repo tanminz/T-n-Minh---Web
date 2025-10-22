@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 66: XML-DOM Parser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .title-cell {
+            background-color: #FFD700;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        tr {
+            background-color: white;
+            color: black;
+        }
+        
+        tr:hover {
+            background-color: blue;
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="result"></div>
+
+    <script>
+        function parseXML() {
+
+            const xmlString = `<sinhvien>
+    <mssv>K123456789</mssv>
+    <hoTen>Quách Thị Bán Bún Bò</hoTen>
+    <ngaySinh>7/7/1997</ngaySinh>
+    <gioiTinh>Nữ</gioiTinh>
+</sinhvien>`;
+
+            try {
+
+                const parser = new DOMParser();
+                
+
+                const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+                
+
+                const parserError = xmlDoc.querySelector("parsererror");
+                if (parserError) {
+                    throw new Error("Lỗi parsing XML: " + parserError.textContent);
+                }
+                
+
+                const mssv = xmlDoc.querySelector("mssv").textContent;
+                const hoTen = xmlDoc.querySelector("hoTen").textContent;
+                const ngaySinh = xmlDoc.querySelector("ngaySinh").textContent;
+                const gioiTinh = xmlDoc.querySelector("gioiTinh").textContent;
+                
+
+                const tableHTML = `
+                    <table>
+                        <tr>
+                            <th colspan="2" class="title-cell">Chi tiết thông tin Sinh Viên</th>
+                        </tr>
+                        <tr>
+                            <th>Mã Sinh Viên</th>
+                            <td>${mssv}</td>
+                        </tr>
+                        <tr>
+                            <th>Họ tên</th>
+                            <td>${hoTen}</td>
+                        </tr>
+                        <tr>
+                            <th>Ngày Sinh</th>
+                            <td>${ngaySinh}</td>
+                        </tr>
+                        <tr>
+                            <th>Giới Tính</th>
+                            <td>${gioiTinh}</td>
+                        </tr>
+                    </table>
+                `;
+                
+
+                document.getElementById("result").innerHTML = tableHTML;
+                
+            } catch (error) {
+                document.getElementById("result").innerHTML = 
+                    `<div style="color: red; padding: 10px; background-color: #ffebee; border: 1px solid #f44336; border-radius: 5px;">
+                        <strong>Lỗi:</strong> ${error.message}
+                    </div>`;
+            }
+        }
+        
+
+        window.onload = function() {
+            parseXML();
+        };
+    </script>
+</body>
+</html>
