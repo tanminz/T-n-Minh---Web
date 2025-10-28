@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dự Báo Thời Tiết – OpenWeatherMap</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h3 {
+            color: #1a73e8;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        select {
+            padding: 10px 15px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            cursor: pointer;
+        }
+        #weather_result {
+            min-height: 150px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .current-weather {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .weather-info {
+            text-align: left;
+        }
+        .temp-main {
+            font-size: 48px;
+            font-weight: bold;
+            color: #e57373; /* Màu nhiệt độ */
+        }
+        .description {
+            font-size: 18px;
+            color: #666;
+            text-transform: capitalize;
+        }
+        .details p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .city-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .weather-icon img {
+            width: 100px;
+            height: 100px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Dự Báo Thời Tiết Tỉnh/Thành 🌦️</h3>
+        <div style="margin-bottom: 15px;">
+            <button onclick="testAPIKey()" style="background: #4CAF50; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-right: 10px;">
+                🔧 Test API Key
+            </button>
+            <span id="api-status" style="color: #666; font-size: 14px;"></span>
+        </div>
+        <select id="provinces" onchange="show_detail_weather_forecast(this.value)">
+            <option value="" disabled selected>-- Chọn Tỉnh/Thành --</option>
+        </select>
+
+        <div id="weather_result">
+            Vui lòng chọn một tỉnh/thành phố để xem dự báo thời tiết.
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        // 🚨 THAY THẾ CHUỖI NÀY BẰNG API KEY CỦA BẠN TỪ OPENWEATHERMAP 🚨
+        const API_KEY = "6b4571303e1efd8c8dfab934b254c077"; // Thay thế bằng API key thật của bạn
+        
+        // Dùng tên thành phố (vì API OpenWeatherMap dễ làm việc với tên thành phố hơn ID)
+        const CITIES = [
+            'An Giang,VN',
+            'Binh Duong,VN',
+            'Binh Phuoc,VN',
+            'Hanoi,VN',
+            'Ho Chi Minh,VN'
+        ];
+
+        const weatherResult = document.getElementById("weather_result");
+
+        function load_provinces() {
+            var provinces = document.getElementById("provinces");
+            
+            // Xóa các option cũ (nếu có)
+            provinces.innerHTML = '<option value="" disabled selected>-- Chọn Tỉnh/Thành --</option>';
+
+            CITIES.forEach(cityData => {
+                const cityName = cityData.split(',')[0].replace('Hanoi', 'Hà Nội').replace('Ho Chi Minh', 'TP. Hồ Chí Minh').replace('Binh Duong', 'Bình Dương').replace('Binh Phuoc', 'Bình Phước').replace('An Giang', 'An Giang');
+                
+                var opt = document.createElement("option");
+                opt.value = cityData; // Lưu tên thành phố và mã nước
+                opt.innerText = cityName;
+                provinces.appendChild(opt);
+            });
+        }
+
+        load_provinces();
+
+        // Hàm test API key
+        function testAPIKey() {
+            const statusElement = document.getElementById("api-status");
+            
+            if (API_KEY === "YOUR_OPENWEATHERMAP_API_KEY") {
+                statusElement.innerHTML = "❌ Chưa cấu hình API Key";
+                statusElement.style.color = "#d32f2f";
+                return;
+            }
+            
+            statusElement.innerHTML = "🔄 Đang kiểm tra...";
+            statusElement.style.color = "#ff9800";
+            
+            // Test với Hà Nội
+            const testUrl = `https://api.openweathermap.org/data/2.5/weather?q=Hanoi,VN&units=metric&appid=${API_KEY}`;
+            
+            fetch(testUrl)
+                .then(response => {
+                    if (response.ok) {
+                        statusElement.innerHTML = "✅ API Key hoạt động bình thường";
+                        statusElement.style.color = "#4CAF50";
+                    } else if (response.status === 401) {
+                        statusElement.innerHTML = "❌ API Key không hợp lệ";
+                        statusElement.style.color = "#d32f2f";
+                    } else if (response.status === 429) {
+                        statusElement.innerHTML = "⚠️ Đã vượt quá giới hạn API";
+                        statusElement.style.color = "#ff9800";
+                    } else {
+                        statusElement.innerHTML = `❌ Lỗi ${response.status}`;
+                        statusElement.style.color = "#d32f2f";
+                    }
+                })
+                .catch(error => {
+                    statusElement.innerHTML = "❌ Lỗi kết nối";
+                    statusElement.style.color = "#d32f2f";
+                    console.error("Test API error:", error);
+                });
+        }
+
+        // Hàm chuyển đổi mô tả thời tiết sang tiếng Việt cơ bản
+        function translateWeather(description) {
+            description = description.toLowerCase();
+            if (description.includes("clear sky")) return "Trời Quang";
+            if (description.includes("few clouds")) return "Ít Mây";
+            if (description.includes("scattered clouds")) return "Mây Rải Rác";
+            if (description.includes("broken clouds")) return "Nhiều Mây";
+            if (description.includes("shower rain")) return "Mưa Rào";
+            if (description.includes("rain")) return "Mưa";
+            if (description.includes("thunderstorm")) return "Giông Bão";
+            if (description.includes("snow")) return "Tuyết";
+            if (description.includes("mist") || description.includes("fog")) return "Sương Mù";
+            return description;
+        }
+
+        // 2. Hàm gọi API OpenWeatherMap
+        function show_detail_weather_forecast(cityData) {
+            if (!cityData) {
+                weatherResult.innerHTML = "<p style='color: red;'>🚨 Vui lòng chọn một tỉnh/thành phố.</p>";
+                return;
+            }
+            
+            if (API_KEY === "YOUR_OPENWEATHERMAP_API_KEY") {
+                weatherResult.innerHTML = `
+                    <div style="text-align: center; padding: 20px; color: #d32f2f;">
+                        <h3>🚨 Cần cấu hình API Key</h3>
+                        <p>Để sử dụng ứng dụng dự báo thời tiết, bạn cần:</p>
+                        <ol style="text-align: left; max-width: 500px; margin: 20px auto;">
+                            <li>Truy cập <a href="https://openweathermap.org/api" target="_blank" style="color: #1976d2;">OpenWeatherMap API</a></li>
+                            <li>Click "Sign Up" để đăng ký tài khoản miễn phí</li>
+                            <li>Xác thực email và đăng nhập</li>
+                            <li>Vào "My API Keys" để lấy API Key</li>
+                            <li>Copy API Key và thay thế <code style="background: #f5f5f5; padding: 2px 4px; border-radius: 3px;">YOUR_OPENWEATHERMAP_API_KEY</code> trong file HTML</li>
+                        </ol>
+                        <div style="background: #e3f2fd; padding: 15px; border-radius: 5px; margin: 15px 0;">
+                            <strong>💡 Mẹo:</strong> API Key miễn phí cho phép 1000 requests/ngày, đủ cho việc test và sử dụng cá nhân.
+                        </div>
+                        <p><strong>Lưu ý:</strong> API Key miễn phí có giới hạn 1000 requests/ngày</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const cityNameDisplay = document.querySelector(`option[value="${cityData}"]`).innerText;
+
+            const API_ENDPOINT = `https://api.openweathermap.org/data/2.5/weather?q=${cityData}&units=metric&lang=vi&appid=${API_KEY}`;
+            
+            weatherResult.innerHTML = `Đang tải dự báo thời tiết cho ${cityNameDisplay}...`;
+
+            fetch(API_ENDPOINT)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Không thể lấy dữ liệu. Mã lỗi: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const temp = Math.round(data.main.temp);
+                    const feelsLike = Math.round(data.main.feels_like);
+                    const humidity = data.main.humidity;
+                    const windSpeed = (data.wind.speed * 3.6).toFixed(1); // m/s sang km/h
+                    const description = data.weather[0].description;
+                    const iconCode = data.weather[0].icon;
+
+                    // Nội dung HTML hiển thị
+                    const htmlContent = `
+                        <div class="city-name">${cityNameDisplay}</div>
+                        <div class="current-weather">
+                            <div class="weather-info">
+                                <p class="temp-main">${temp}°C</p>
+                                <p class="description">${description}</p>
+                            </div>
+                            <div class="weather-icon">
+                                <img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" alt="Icon thời tiết">
+                            </div>
+                        </div>
+                        <div class="details">
+                            <p>Cảm giác như: <strong>${feelsLike}°C</strong></p>
+                            <p>Độ ẩm: <strong>${humidity}%</strong></p>
+                            <p>Tốc độ gió: <strong>${windSpeed} km/h</strong></p>
+                            <p>Cập nhật lúc: <strong>${new Date().toLocaleTimeString('vi-VN')}</strong></p>
+                        </div>
+                    `;
+
+                    weatherResult.innerHTML = htmlContent;
+                })
+                .catch(error => {
+                    console.error("Lỗi khi tải dự báo thời tiết:", error);
+                    weatherResult.innerHTML = `<p style="color: red;">⚠️ Lỗi API: ${error.message}. Thử kiểm tra API Key.</p>`;
+                });
+        }
+    </script>
+</body>
+</html>
