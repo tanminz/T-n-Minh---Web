@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VnExpress RSS – Kinh doanh</title>
+  <style>
+    /* Thiết lập chung */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f7f6; /* Nền nhẹ nhàng */
+      color: #333;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+      border-radius: 8px; /* Bo góc */
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #c00; /* Màu đỏ VnExpress */
+      margin: 0 0 20px;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+      text-align: center;
+    }
+
+    /* Phong cách cho danh sách tin (RSS Feed Items) */
+    .rss-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .rss-item {
+      display: flex; /* Dùng Flexbox cho mỗi tin */
+      align-items: flex-start;
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    .rss-item:hover {
+      background-color: #fafafa; /* Hiệu ứng hover */
+      border-color: #c00;
+    }
+
+    /* Ảnh thumbnail */
+    .thumb-container {
+      flex-shrink: 0; /* Không co lại */
+      width: 120px; /* Tăng kích thước ảnh */
+      height: 80px;
+      margin-right: 15px;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .no-image {
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 10px;
+      text-align: center;
+    }
+
+    /* Nội dung tin tức */
+    .content {
+      flex-grow: 1; /* Chiếm hết không gian còn lại */
+    }
+
+    .content a {
+      font-size: 16px;
+      font-weight: 600;
+      color: #333;
+      text-decoration: none;
+      line-height: 1.4;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .content a:hover {
+      color: #c00;
+      text-decoration: underline;
+    }
+
+    .muted {
+      color: #999;
+      font-size: 13px;
+    }
+
+    /* Responsive cho màn hình nhỏ */
+    @media (max-width: 600px) {
+      .rss-item {
+        flex-direction: column; /* Xếp chồng ảnh lên trên nội dung */
+        padding: 10px;
+      }
+      .thumb-container {
+        width: 100%;
+        height: 150px;
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+      h1 {
+        font-size: 22px;
+      }
+      .content a {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>VnExpress RSS – Kinh doanh 🚀</h1>
+    <ul id="rss_list" class="rss-list">
+      <li id="loading-msg">Đang tải tin tức...</li>
+    </ul>
+  </div>
+
+  <script>
+    // URL RSS của VnExpress chuyên mục Kinh doanh
+    const RSS_URL = "https://vnexpress.net/rss/kinh-doanh.rss";
+    
+    // Dùng AllOrigins để vượt qua lỗi CORS khi gọi RSS trực tiếp từ trình duyệt
+    const API_PROXY = "https://api.allorigins.win/get?url=" + encodeURIComponent(RSS_URL);
+
+    const rssList = document.getElementById("rss_list");
+    const loadingMsg = document.getElementById("loading-msg");
+
+    // Hàm định dạng lại ngày tháng từ chuẩn RSS
+    const formatDate = (dateString) => {
+        try {
+            // PubDate thường có dạng "Thu, 28 Oct 2025 08:55:36 +0700"
+            const date = new Date(dateString);
+            return date.toLocaleDateString("vi-VN", {
+                year: 'numeric', month: 'long', day: 'numeric', 
+                hour: '2-digit', minute: '2-digit'
+            });
+        } catch (e) {
+            return dateString; // Trả về nguyên gốc nếu định dạng lỗi
+        }
+    };
+
+    fetch(API_PROXY)
+      .then(r => {
+        if (!r.ok) throw new Error(`HTTP error! status: ${r.status}`);
+        return r.json();
+      })
+      .then(data => {
+        // Xóa thông báo đang tải
+        if (loadingMsg) loadingMsg.remove(); 
+
+        // data.contents là string XML, cần parse
+        const xml = new DOMParser().parseFromString(data.contents, "text/xml");
+        const items = xml.querySelectorAll("item");
+        
+        if (items.length === 0) {
+            rssList.innerHTML = "<li class='muted'>Không tìm thấy tin tức nào.</li>";
+            return;
+        }
+
+        items.forEach(item => {
+          const title = item.querySelector("title")?.textContent?.trim() || "Không có tiêu đề";
+          const link = item.querySelector("link")?.textContent?.trim() || "#";
+          const pubDate = item.querySelector("pubDate")?.textContent?.trim() || "";
+          const desc = item.querySelector("description")?.textContent || "";
+
+          // 1. Lấy ảnh từ description
+          const tmp = document.createElement("div");
+          tmp.innerHTML = desc;
+          // Lấy src của thẻ <img> đầu tiên
+          const imgSrc = tmp.querySelector("img")?.getAttribute("src") || "";
+
+          // 2. Tạo phần tử li (item)
+          const li = document.createElement("li");
+          li.className = "rss-item";
+
+          // 3. Tạo phần tử ảnh
+          const thumbContainer = document.createElement("div");
+          thumbContainer.className = "thumb-container";
+
+          if (imgSrc) {
+            const img = document.createElement("img");
+            img.src = imgSrc;
+            img.className = "thumb";
+            img.alt = title;
+            thumbContainer.appendChild(img);
+          } else {
+            thumbContainer.classList.add("no-image");
+            thumbContainer.innerHTML = "<span class='muted'>KHÔNG CÓ ẢNH</span>";
+          }
+          li.appendChild(thumbContainer);
+
+          // 4. Tạo phần tử nội dung
+          const contentDiv = document.createElement("div");
+          contentDiv.className = "content";
+
+          // Tiêu đề (là link)
+          const a = document.createElement("a");
+          a.href = link;
+          a.target = "_blank"; // Mở trang gốc trong tab mới
+          a.textContent = title;
+          contentDiv.appendChild(a);
+
+          // Ngày đăng
+          const dateSpan = document.createElement("span");
+          dateSpan.className = "muted";
+          dateSpan.textContent = "📅 " + formatDate(pubDate);
+          contentDiv.appendChild(dateSpan);
+          
+          li.appendChild(contentDiv);
+          rssList.appendChild(li);
+        });
+      })
+      .catch(err => {
+        console.error("Lỗi tải RSS:", err);
+        // Hiển thị thông báo lỗi thân thiện hơn
+        rssList.innerHTML = `<li class='muted' style='color: #c00;'>⚠️ Lỗi: Không tải được tin RSS. Vui lòng kiểm tra kết nối hoặc dịch vụ proxy.</li>`;
+      });
+  </script>
+</body>
+</html>
