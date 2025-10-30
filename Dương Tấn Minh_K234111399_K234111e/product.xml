@@ -1,0 +1,32 @@
+<products>
+    <product>
+    <id>1</id>
+    <name>Where's Spot? </name>
+    <detail>With its bold blue cover, this board product edition of Eric Hill’s classic story featuring everyone’s favorite puppy is just as iconic as the first lift-the-flap edition.</detail>
+    <image>https://images-na.ssl-images-amazon.com/images/I/81KAMv9wetL._AC_UL160_SR160,160_.jpg</image>
+    </product>
+    <product>
+    <id>2</id>
+    <name>Lansinoh Stay Dry Disposable Nursing Pads</name>
+    <detail>SUPERIOR ABSORBENCY FOR EXTRA CONFIDENCE - These pads absorb 20 times their weight to keep you confident and dry day and night RECOMMENDED BY MOMS - Convenient, easy to use, and very absorbent, Lansinoh nursing pads have an InvisiLock core to instantly capture and disperse moisture</detail>
+    <image>https://images-na.ssl-images-amazon.com/images/I/71e0wNZ3ZQL._AC_UL160_SR160,160_.jpg</image>
+    </product>
+    <product>
+    <id>3</id>
+    <name>Goodnight Moon</name>
+    <detail>In a great green room, tucked away in bed, is a little bunny. "Goodnight room, goodnight moon." And to all the familiar things in the softly lit room—to the picture of the three little bears sitting on chairs, to the clocks and his socks, to the mittens and the kittens, to everything one by one—the little bunny says goodnight.</detail>
+    <image>https://images-na.ssl-images-amazon.com/images/I/81t-IstQ+ZL._AC_UL232_SR232,232_.jpg</image>
+    </product>
+    <product>
+    <id>4</id>
+    <name>The Very Hungry Caterpillar </name>
+    <detail>THE all-time classic picture product, from generation to generation, sold somewhere in the world every 30 seconds! A sturdy and beautiful product to give as a gift for new babies, baby showers, birthdays, and other new beginnings!</detail>
+    <image>https://images-na.ssl-images-amazon.com/images/I/91vnzZO5yPL._AC_UL232_SR232,232_.jpg</image>
+    </product>
+    <product>
+    <id>5</id>
+    <name>Brown Bear, Brown Bear, What Do You See?</name>
+    <detail>A big happy frog, a plump purple cat, a handsome blue horse, and a soft yellow duck--all parade across the pages of this delightful product. Children will immediately respond to Eric Carle's flat, boldly colored collages. Combined with Bill Martin's singsong text, they create unforgettable images of these endearing animals.</detail>
+    <image>https://images-na.ssl-images-amazon.com/images/I/81kZ3Gl3WKL._AC_UL254_SR254,254_.jpg</image>
+    </product>
+    </products>

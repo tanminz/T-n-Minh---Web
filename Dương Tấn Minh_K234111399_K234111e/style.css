@@ -1,0 +1,266 @@
+body {
+  display: grid;
+  grid-template-areas:
+    "region-a"
+    "region-c"
+    "region-e";
+  grid-template-columns: 1fr; /* single full-width column */
+  grid-template-rows: 150px auto 64px;
+  min-height: 100vh;
+  margin: 0;
+  background: #f5f7fb;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Region A (Header + Menu) */
+#region-a {
+  grid-area: region-a;
+  background: linear-gradient(90deg, #b30000, #d23a3a);
+  color: #fff;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+  padding: 10px 16px;
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.brand-info h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.brand-info p {
+  margin: 2px 0 0 0;
+  opacity: .9;
+  font-size: 13px;
+}
+
+#main-menu {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+}
+
+#main-menu button {
+  background: #fff;
+  color: #b30000;
+  border: none;
+  font-weight: 600;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform .15s ease, background .2s ease;
+}
+
+#main-menu button:hover { background: #ffe3e3; transform: translateY(-1px); }
+#main-menu button:active { transform: translateY(0); }
+
+/* Regions B, C, D */
+#region-b { display: none; }
+#region-c { grid-area: region-c; background: #ffffff; padding: 24px 28px; }
+#region-d { display: none; }
+
+.panel h2 { margin-top: 0; font-size: 16px; color: #b30000; }
+
+.card {
+  border: 1px solid #eef0f4;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  padding: 16px;
+  max-width: none; /* allow full width */
+}
+
+.about-card .profile {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.about-card .avatar img { width: 180px; height: 180px; object-fit: cover; border-radius: 12px; display: block; }
+
+.about-card .intro { margin-top: 10px; color: #444; }
+
+/* constrain and center main dynamic container */
+#main_display_area { width: 100%; }
+
+/* Make header content stretch edge-to-edge */
+#region-a { padding: 12px 16px; }
+#main-menu { display: flex; flex-wrap: wrap; gap: 8px; }
+#main-menu button { flex: 0 0 auto; }
+
+/* Hide any stray buttons injected into content root (old layout remnants) */
+/* Do not globally hide buttons in content; specific components manage their own buttons */
+
+/* In case bản cũ còn thẻ #B/#D trong DOM, ẩn hoàn toàn */
+#B, #D { display: none !important; }
+
+/* Products UI */
+.products-header { margin-bottom: 12px; }
+.products .muted { color: #6b7280; font-size: 14px; }
+.grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:18px; }
+.product-card { background:#fff; border:1px solid #eef0f4; border-radius:14px; overflow:hidden; box-shadow:0 8px 20px rgba(0,0,0,.06); display:flex; flex-direction:column; }
+.product-card img { width:100%; height:180px; object-fit:cover; }
+.product-info { padding:14px 16px; }
+.product-info h3 { margin:0 0 8px 0; font-size:17px; color:#b30000; }
+.product-info p { margin:0; color:#374151; font-size:14px; line-height:1.45; }
+
+/* Employees */
+.emp-form .row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; align-items: end; }
+.emp-form label { display: flex; flex-direction: column; font-size: 13px; gap: 6px; }
+.emp-form input, #empForm input { padding: 10px 12px; border: 1px solid #d9dde3; border-radius: 10px; outline: none; }
+.emp-form button, #empForm button, .btn { padding: 10px 16px; background: #b30000; color: #fff; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; }
+.emp-form button:hover, #empForm button:hover, .btn:hover { background: #d23a3a; }
+.table-wrap { margin-top: 14px; }
+.emp-table { width: 100%; border-collapse: collapse; }
+.emp-table th, .emp-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #eef0f4; }
+.emp-table thead th { background: #f6f7f9; font-weight: 700; }
+.emp-table .danger { background: #fff; color: #b30000; border: 1px solid #b30000; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+.emp-table .danger:hover { background: #ffe3e3; }
+.emp-table tr.age-young { background: #fff8bf; }
+.emp-table tr.age-other { background: #ffd6ff; }
+.emp-table tr:hover { background: #fff6e3; }
+
+/* Weather */
+.controls { margin: 10px 0; }
+.controls button { padding: 8px 14px; background: #b30000; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.controls button:hover { background: #d23a3a; }
+.weather-table { width: 100%; border-collapse: collapse; }
+.weather-table th, .weather-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #eef0f4; }
+.weather-table thead th { background: #f6f7f9; }
+
+/* Pretty Weather card */
+.wx-title { text-align:center; color:#b30000; font-size:28px; margin: 0 0 12px 0; }
+.wx-select-wrap { display:flex; justify-content:center; margin-bottom: 16px; }
+.wx-select { padding:10px 14px; border:1px solid #d9dde3; border-radius:10px; min-width:250px; }
+.wx-card { display:flex; justify-content:center; }
+.wx-panel { width: 720px; background:#fff; border-radius:16px; box-shadow:0 12px 30px rgba(0,0,0,.08); padding:28px; text-align:center; }
+.wx-panel h3 { margin-top:0; font-size:28px; }
+.wx-icon { width:120px; height:120px; object-fit:contain; display:block; margin: 10px auto; }
+.wx-status { font-size:18px; margin:6px 0 16px 0; }
+.wx-details { display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:8px 16px; text-align:left; max-width:520px; margin:0 auto; }
+.wx-loading { text-align:center; padding:30px; }
+
+/* About card & avatar */
+.about-card { max-width: 820px; margin: 0 auto; text-align: center; }
+.about-card .avatar { width: 180px; height: 180px; object-fit: cover; border-radius: 14px; display: block; margin: 12px auto; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+
+/* Login / RSS / Misc */
+#loginForm { max-width: 420px; margin: 0 auto; display: grid; gap: 10px; padding: 16px; border: 1px solid #eef0f4; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.05); }
+#loginForm input { padding: 10px 12px; border: 1px solid #d9dde3; border-radius: 10px; }
+.rss-item { display: grid; grid-template-columns: 100px 1fr; gap: 12px; align-items: center; padding: 10px; border: 1px solid #eef0f4; border-radius: 12px; background: #fff; box-shadow: 0 4px 10px rgba(0,0,0,.04); margin-bottom: 10px; }
+.rss-item img { width: 100px; height: 70px; object-fit: cover; border-radius: 8px; }
+.rss-item a { color: #111827; font-weight: 600; text-decoration: none; }
+.rss-item a:hover { color: #b30000; text-decoration: underline; }
+
+/* Region E (Footer / Q10) */
+#region-e {
+  grid-area: region-e;
+  background: #222;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+/* Declaration fixed box */
+#declaration-box {
+  position: fixed;
+  top: 110px; /* just below header */
+  right: 20px;
+  width: 320px;
+  height: 220px; /* taller */
+  background: #ffffff;
+  border: 1px solid #eef0f4;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+  padding: 10px 14px;
+  z-index: 10;
+}
+#declaration-box marquee { height: 100%; color: #111827; font-weight: 600; }
+
+/* Left toolbox for Q8 */
+#toolbox-left {
+  position: fixed;
+  top: 110px;
+  left: 20px;
+  width: 360px;
+  min-height: 160px;
+  background: #ffffff;
+  border: 1px solid #eef0f4;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+  padding: 12px 14px;
+  z-index: 10;
+}
+.tool-header { font-weight: 700; color: #b30000; margin-bottom: 8px; }
+
+@media (max-width: 1100px) {
+  #main-menu { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 700px) {
+  body { grid-template-columns: 1fr; grid-template-areas: "region-a" "region-c" "region-b" "region-d" "region-e"; }
+  #region-b, #region-d { border: none; }
+  #main-menu { grid-template-columns: repeat(2, 1fr); }
+}
+/* ... giữ nguyên toàn bộ nội dung cũ ở trên ... */
+
+/* RSS */
+.rss-item { border:1px solid #ddd; border-radius:8px; overflow:hidden; margin:10px 0; display:flex; gap:10px; align-items:center; }
+.rss-item img { width:100px; height:100px; object-fit:cover; }
+.rss-item a { font-weight:600; color:#b30000; text-decoration:none; }
+.rss-item a:hover { text-decoration:underline; }
+
+/* Login */
+#loginForm { display:flex; flex-direction:column; gap:10px; max-width:300px; margin:auto; }
+#loginForm input { padding:8px; border:1px solid #ccc; border-radius:6px; }
+#loginForm button { background:#b30000; color:white; border:none; border-radius:6px; padding:8px; cursor:pointer; }
+
+/* Vietlott */
+table { border-collapse:collapse; width:100%; margin-top:10px; }
+th, td { border:1px solid #ddd; padding:8px; text-align:left; }
+th { background:#f6f7f9; }
+#lotteryForm {
+  margin: 10px 0 15px 0;
+  display: flex;
+  gap: 20px;
+  font-weight: 600;
+  color: #b30000;
+}
+
+#lotteryResult table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#lotteryResult th, #lotteryResult td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#lotteryResult th {
+  background: #f6f7f9;
+  color: #b30000;
+}

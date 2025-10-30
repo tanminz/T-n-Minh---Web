@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KIWI Company Portal · BW04</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="main.js"></script>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header id="region-a">
+        <div class="branding">
+          <div class="logo-circle" aria-hidden="true">KI</div>
+          <div class="brand-info">
+            <h1>Kiwi Company Portal</h1>
+            <p>Business Web Development · Code BW04</p>
+          </div>
+        </div>
+        <nav id="main-menu" aria-label="Main menu">
+          <button type="button" onclick="showContent('about')">About me</button>
+          <button type="button" onclick="showContent('formjs')">Form &amp; Javascript</button>
+          <button type="button" onclick="showContent('api')">API and External</button>
+          <button type="button" onclick="showContent('login')">Login/Logout</button>
+          <button type="button" onclick="showContent('products')">Products</button>
+          <button type="button" onclick="showContent('weather')">Weather API</button>
+          <button type="button" onclick="showContent('employees')">Employees</button>
+          <button type="button" onclick="showContent('rss')">RSS</button>
+        </nav>
+      </header>
+
+      <!-- Declaration box (fixed under header, right side) -->
+      <aside id="declaration-box" aria-label="Declaration">
+        <marquee direction="up" scrollamount="3">
+          I declare that all of these solutions are my own and not copied from anyone in this class.
+        </marquee>
+      </aside>
+
+      <!-- Toolbox Left: Vietlott quick view (radio) -->
+      <aside id="toolbox-left" aria-label="Quick Tools">
+        <div class="tool-header">Vietlott – Quick View</div>
+        <div id="lotteryForm">
+          <label><input type="radio" name="type" value="mega645" checked> Mega 6/45</label>
+          <label><input type="radio" name="type" value="power655"> Power 6/55</label>
+        </div>
+        <div id="lotteryResult"></div>
+      </aside>
+
+      <main id="region-c">
+        <div id="main_display_area" data-default="about"></div>
+      </main>
+
+      <footer id="region-e">
+        <span id="q10_content"></span>
+      </footer>
+    </div>
+  </body>
+</html>
